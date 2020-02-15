@@ -1,0 +1,6 @@
+2020-01-22 19:13:16.432967 --- BD Vehiculos Auto Conduccion --- 
+ Adelante 6
+ SemIzq 0
+ Izq 0
+ SemDer 0
+ Der 0
