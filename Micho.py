@@ -131,8 +131,11 @@ def show_webcam(mirror=False):
             quit()
         elif k == ord('u'):
             cont += 1
+            i_ad += 1
+            ADELANTE(vel,tiempo,i_ad)
             print(cont)
         else:
+            PARAR(alto)
             print("stopping...")
         # elif k == ord('i'):   # 'i' es adelante
         #     cv2.imwrite('BD_mov/3_AD/adelante{:>04}.png'.format(i_ad),output)
