@@ -126,6 +126,7 @@ def show_webcam(mirror=False):
         cv2.imshow('my webcam', output)
 
         k = cv2.waitKey(1)
+        print("k es: ", k)
         if k == ESCAPE_KEYBOARD:
             escape_order()
             cv2.destroyAllWindows()
