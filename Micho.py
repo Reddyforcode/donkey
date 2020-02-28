@@ -142,7 +142,7 @@ def show_webcam(mirror=False):
             cv2.imwrite('BD_mov/3_AD/adelante{:>04}.png'.format(i_ad),output)
             i_ad += 1
             ADELANTE(vel,tiempo,i_ad)
-            PARAR(alto)
+            # PARAR(alto)
         elif k == ord('u'):  # 'u' es semi-izquierda
             cv2.imwrite('BD_mov/2_SI/semiz{:>04}.png'.format(i_si),output)
             i_si += 1
@@ -166,8 +166,7 @@ def show_webcam(mirror=False):
         elif k == ord('k'):  # 'k' es atras
             ATRAS(vel,tiempo)
             PARAR(alto)
-        else:
-            print("stop hello")
+     
 
 
 
