@@ -130,42 +130,44 @@ def show_webcam(mirror=False):
             escape_order()
             cv2.destroyAllWindows()
             quit()
-        elif k == ord('u'):
-            cont += 1
-            i_ad += 1
-            ADELANTE(vel,tiempo,i_ad)
-            print(cont)
-        else:
-            PARAR(alto)
-            print("stopping...")
-        # elif k == ord('i'):   # 'i' es adelante
-        #     cv2.imwrite('BD_mov/3_AD/adelante{:>04}.png'.format(i_ad),output)
+        # elif k == ord('u'):
+        #     cont += 1
         #     i_ad += 1
         #     ADELANTE(vel,tiempo,i_ad)
+        #     print(cont)
+        # else:
         #     PARAR(alto)
-        # elif k == ord('u'):  # 'u' es semi-izquierda
-        #     cv2.imwrite('BD_mov/2_SI/semiz{:>04}.png'.format(i_si),output)
-        #     i_si += 1
-        #     SEMIZQ(vel,tiempo,i_si)
-        #     PARAR(alto)
-        # elif k == ord('j'):  # 'j' es izquierda
-        #     cv2.imwrite('BD_mov/1_IZ/izq{:>04}.png'.format(i_iz),output)
-        #     i_iz +=1
-        #     IZQUIERDA(vel,tiempo,i_iz)
-        #     PARAR(alto)
-        # elif k == ord('o'):  # 'o' es semi-derecha
-        #     cv2.imwrite('BD_mov/4_SD/semder{:>04}.png'.format(i_sd),output)
-        #     i_sd +=1
-        #     SEMIDER(vel,tiempo,i_sd)
-        #     PARAR(alto)
-        # elif k == ord('l'):  # 'l' es derecha
-        #     cv2.imwrite('BD_mov/5_DE/der{:>04}.png'.format(i_de),output)
-        #     i_de +=1
-        #     DERECHA(vel,tiempo,i_de)
-        #     PARAR(alto)
-        # elif k == ord('k'):  # 'k' es atras
-        #     ATRAS(vel,tiempo)
-        #     PARAR(alto)
+        #     print("stopping...")
+        elif k == ord('i'):   # 'i' es adelante
+            cv2.imwrite('BD_mov/3_AD/adelante{:>04}.png'.format(i_ad),output)
+            i_ad += 1
+            ADELANTE(vel,tiempo,i_ad)
+            PARAR(alto)
+        elif k == ord('u'):  # 'u' es semi-izquierda
+            cv2.imwrite('BD_mov/2_SI/semiz{:>04}.png'.format(i_si),output)
+            i_si += 1
+            SEMIZQ(vel,tiempo,i_si)
+            PARAR(alto)
+        elif k == ord('j'):  # 'j' es izquierda
+            cv2.imwrite('BD_mov/1_IZ/izq{:>04}.png'.format(i_iz),output)
+            i_iz +=1
+            IZQUIERDA(vel,tiempo,i_iz)
+            PARAR(alto)
+        elif k == ord('o'):  # 'o' es semi-derecha
+            cv2.imwrite('BD_mov/4_SD/semder{:>04}.png'.format(i_sd),output)
+            i_sd +=1
+            SEMIDER(vel,tiempo,i_sd)
+            PARAR(alto)
+        elif k == ord('l'):  # 'l' es derecha
+            cv2.imwrite('BD_mov/5_DE/der{:>04}.png'.format(i_de),output)
+            i_de +=1
+            DERECHA(vel,tiempo,i_de)
+            PARAR(alto)
+        elif k == ord('k'):  # 'k' es atras
+            ATRAS(vel,tiempo)
+            PARAR(alto)
+        else:
+            print("stop hello")
 
 
 
