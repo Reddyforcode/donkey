@@ -3,7 +3,7 @@ from Raspi_MotorHAT import Raspi_MotorHAT, Raspi_DCMotor    # Cabeceras del Moto
 from datetime import datetime
 from datetime import date
 
-from .orders.orders import escape
+from orders import *
 import time
 import atexit
 import cv2
