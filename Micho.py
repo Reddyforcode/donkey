@@ -3,6 +3,7 @@ from Raspi_MotorHAT import Raspi_MotorHAT, Raspi_DCMotor    # Cabeceras del Moto
 from datetime import datetime
 from datetime import date
 
+from .orders.orders import escape
 import time
 import atexit
 import cv2
@@ -12,6 +13,9 @@ mh = Raspi_MotorHAT(addr=0x6f)
 vel=75
 tiempo=1
 alto=0.01
+# ESCAPE KEYBOARd 
+ESCAPE_KEYBOARD = 27
+cont = 0
 ################################# DATOS DC motor test!
 # recommended for auto-disabling motors on shutdown!
 def turnOffMotors():
@@ -43,6 +47,7 @@ def setServoPulse(channel, pulse):
     pulse *= 1000
     pulse /= pulseLength
     pwm.setPWM(channel, 0, pulse)
+
 pwm.setPWMFreq(60)  # Set frequency to 60 Hz
 def ATRAS(arg1,arg2):
     print("ATRAS")
@@ -51,6 +56,7 @@ def ATRAS(arg1,arg2):
     myMotor.run(Raspi_MotorHAT.BACKWARD)
     myMotor.setSpeed(arg1)
     time.sleep(arg2)
+
 def ADELANTE(arg1,arg2,arg3):
     print("ADELANTE " + str(arg3))
     pwm.setPWM(1, 0, 350)
@@ -100,6 +106,7 @@ def SEMIDER(arg1,arg2,arg3):
 
 
 def show_webcam(mirror=False):
+    global cont
     cam = cv2.VideoCapture(0)
     i_ad=0
     i_si=0
@@ -107,6 +114,7 @@ def show_webcam(mirror=False):
     i_de=0
     i_sd=0
 
+        
     while True:
         ret_val, img = cam.read()
         if mirror:
@@ -117,52 +125,43 @@ def show_webcam(mirror=False):
         cv2.imshow('my webcam', output)
 
         k = cv2.waitKey(1)
-        if k == 27:
-            now = datetime.now()
-            today = date.today()
-            #     &&&&&&&&&&&&&6 Guardando en Archivo
-            print(today)
-            print(now)
-            f = open('GENERADOS.txt', 'w')
-            f.write(str(now) +" --- BD Vehiculos Auto Conduccion --- " )
-            f.write("\n" + " Adelante " + str(i_ad))
-            f.write("\n" + " SemIzq " + str(i_si))
-            f.write("\n" + " Izq " + str(i_iz))
-            f.write("\n" + " SemDer " + str(i_sd))
-            f.write("\n" + " Der " + str(i_de))
-
-            f.close()
-            #       &&&& fin de guardado &&&&
+        if k == ESCAPE_KEYBOARD:
+            escape_order()
             cv2.destroyAllWindows()
             quit()
-        elif k == ord('i'):   # 'i' es adelante
-            cv2.imwrite('BD_mov/3_AD/adelante{:>04}.png'.format(i_ad),output)
-            i_ad += 1
-            ADELANTE(vel,tiempo,i_ad)
-            # PARAR(alto)
-        elif k == ord('u'):  # 'u' es semi-izquierda
-            cv2.imwrite('BD_mov/2_SI/semiz{:>04}.png'.format(i_si),output)
-            i_si += 1
-            SEMIZQ(vel,tiempo,i_si)
-            PARAR(alto)
-        elif k == ord('j'):  # 'j' es izquierda
-            cv2.imwrite('BD_mov/1_IZ/izq{:>04}.png'.format(i_iz),output)
-            i_iz +=1
-            IZQUIERDA(vel,tiempo,i_iz)
-            PARAR(alto)
-        elif k == ord('o'):  # 'o' es semi-derecha
-            cv2.imwrite('BD_mov/4_SD/semder{:>04}.png'.format(i_sd),output)
-            i_sd +=1
-            SEMIDER(vel,tiempo,i_sd)
-            PARAR(alto)
-        elif k == ord('l'):  # 'l' es derecha
-            cv2.imwrite('BD_mov/5_DE/der{:>04}.png'.format(i_de),output)
-            i_de +=1
-            DERECHA(vel,tiempo,i_de)
-            PARAR(alto)
-        elif k == ord('k'):  # 'k' es atras
-            ATRAS(vel,tiempo)
-            PARAR(alto)
+        elif k == ord('u'):
+            cont += 1
+            print(cont)
+        else:
+            print("stopping...")
+        # elif k == ord('i'):   # 'i' es adelante
+        #     cv2.imwrite('BD_mov/3_AD/adelante{:>04}.png'.format(i_ad),output)
+        #     i_ad += 1
+        #     ADELANTE(vel,tiempo,i_ad)
+        #     PARAR(alto)
+        # elif k == ord('u'):  # 'u' es semi-izquierda
+        #     cv2.imwrite('BD_mov/2_SI/semiz{:>04}.png'.format(i_si),output)
+        #     i_si += 1
+        #     SEMIZQ(vel,tiempo,i_si)
+        #     PARAR(alto)
+        # elif k == ord('j'):  # 'j' es izquierda
+        #     cv2.imwrite('BD_mov/1_IZ/izq{:>04}.png'.format(i_iz),output)
+        #     i_iz +=1
+        #     IZQUIERDA(vel,tiempo,i_iz)
+        #     PARAR(alto)
+        # elif k == ord('o'):  # 'o' es semi-derecha
+        #     cv2.imwrite('BD_mov/4_SD/semder{:>04}.png'.format(i_sd),output)
+        #     i_sd +=1
+        #     SEMIDER(vel,tiempo,i_sd)
+        #     PARAR(alto)
+        # elif k == ord('l'):  # 'l' es derecha
+        #     cv2.imwrite('BD_mov/5_DE/der{:>04}.png'.format(i_de),output)
+        #     i_de +=1
+        #     DERECHA(vel,tiempo,i_de)
+        #     PARAR(alto)
+        # elif k == ord('k'):  # 'k' es atras
+        #     ATRAS(vel,tiempo)
+        #     PARAR(alto)
 
 
 
