@@ -58,6 +58,7 @@ def ATRAS(arg1,arg2):
     time.sleep(arg2)
 
 def ADELANTE(arg1,arg2,arg3):
+    print("{}, {}, {}".format(arg1, arg2, arg3))
     print("ADELANTE " + str(arg3))
     pwm.setPWM(1, 0, 350)
     time.sleep(1)
