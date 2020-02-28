@@ -167,6 +167,8 @@ def show_webcam(mirror=False):
         elif k == ord('k'):  # 'k' es atras
             ATRAS(vel,tiempo)
             PARAR(alto)
+        else:
+            PARAR(alto)
      
 
 
